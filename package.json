@@ -1,0 +1,17 @@
+{
+  "name": "schach-programm",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack",
+    "dev": "./node_modules/.bin/webpack --watch"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "private": true
+}
