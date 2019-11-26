@@ -1,0 +1,26 @@
+#board {
+  display: flex;
+  flex-wrap: wrap;
+  width: 640px;
+  height: 640px;
+}
+
+.tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12.5%;
+  height: 12.5%;
+}
+
+.tile.white {
+  background: #fad6a5;
+}
+
+.tile.black {
+  background: #a93c09;
+}
+
+.figure {
+  font-size: 50px;
+}
