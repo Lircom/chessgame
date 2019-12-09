@@ -32,7 +32,6 @@ export class Board {
   }
 
   setUpFigures() {
-
     this.tiles[0].figure = new Rook(TileColor.White)
     this.tiles[1].figure = new Knight(TileColor.White)
     this.tiles[2].figure = new Bishop(TileColor.White)
@@ -52,37 +51,38 @@ export class Board {
     this.tiles[58].figure = new Bishop(TileColor.Black)
     this.tiles[57].figure = new Knight(TileColor.Black)
     this.tiles[56].figure = new Rook(TileColor.Black)
+
     for (let i = 48 ; i < 56; i++) {
       this.tiles[i].figure = new Pawn(TileColor.Black)
-  }
-}
-
-moveFigure(from: string, to: string) {
-  let [fromRow, fromColumn] = tileDescriptionToRowAndColumn(from)
-  let fromIndex = rowAndColumnToIndex(fromRow, fromColumn)
-
-  let [toRow, toColumn] = tileDescriptionToRowAndColumn(to)
-  let toIndex = rowAndColumnToIndex(toRow, toColumn)
-
-  let fromTile = this.tiles[fromIndex]
-  let toTile = this.tiles[toIndex]
-
-  if (!fromTile.figure) {
-    alert("Ursprungsfeld ist leer")
-    return
+    }
   }
 
-  if (toTile.figure && fromTile.figure.color === toTile.figure.color) {
-    alert("Feld ist Besetzt")
-    return
-  }
+  moveFigure(from: string, to: string) {
+    let [fromRow, fromColumn] = tileDescriptionToRowAndColumn(from)
+    let fromIndex = rowAndColumnToIndex(fromRow, fromColumn)
 
-  if (!fromTile.figure.isPermittedMove(from, to, this)) {
-    alert("Figur darf sich nicht so bewegen!")
-    return
-  }
+    let [toRow, toColumn] = tileDescriptionToRowAndColumn(to)
+    let toIndex = rowAndColumnToIndex(toRow, toColumn)
 
-  toTile.figure = fromTile.figure
-  fromTile.figure = null;
-}
+    let fromTile = this.tiles[fromIndex]
+    let toTile = this.tiles[toIndex]
+
+    if (!fromTile.figure) {
+      alert("Ursprungsfeld ist leer")
+      return
+    }
+
+    if (toTile.figure && fromTile.figure.color === toTile.figure.color) {
+      alert("Feld ist Besetzt")
+      return
+    }
+
+    if (!fromTile.figure.isPermittedMove(from, to, this)) {
+      alert("Figur darf sich nicht so bewegen!")
+      return
+    }
+
+    toTile.figure = fromTile.figure
+    fromTile.figure = null;
+  }
 }

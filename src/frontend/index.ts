@@ -10,7 +10,7 @@ export class Game {
   }
 
   play() {
-    document.getElementById("move").addEventListener("click", this.handleMove);
+    document.getElementById("move").addEventListener("click", () => this.handleMove());
 
     this.displayBoard()
   }
