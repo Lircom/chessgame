@@ -19,7 +19,6 @@ export class Game {
   handleClick(row, column){
     let index = rowAndColumnToIndex(row, column)
 
-
     if (this.selectedTile) {
       if (this.selectedTile === index ) {
         this.selectedTile = null
@@ -30,8 +29,8 @@ export class Game {
         let to = indexToTileDescription(index)
 
         this.board.moveFigure(from, to)
-        this.displayBoard()
         this.selectedTile = null
+        this.displayBoard()
       }
     }
     else {
@@ -41,6 +40,7 @@ export class Game {
       }
       else {
         this.selectedTile = index
+        this.displayBoard()
       }
     }
 
@@ -58,6 +58,10 @@ export class Game {
         let tileElement = document.createElement("div");
         tileElement.classList.add("tile")
         tileElement.classList.add(tile.color === TileColor.White ? "white" : "black")
+        if(this.selectedTile === index) {
+          tileElement.classList.add("selected")
+        }
+
         tileElement.addEventListener("click", event => this.handleClick(row, column))
 
         let figure = tile.figure;
