@@ -1,10 +1,11 @@
-import { rowAndColumnToIndex, indexToTileDescription } from "../definitions/functions";
+import { rowAndColumnToIndex, indexToTileDescription, tileDescriptionToIndex } from "../definitions/functions";
 import { Board } from "../definitions/board";
 import { TileColor} from "../definitions/tile";
 
 export class Game {
   board: Board
   selectedTile: number
+  turnNumber: number
 
   constructor() {
     this.board = new Board()
@@ -14,6 +15,28 @@ export class Game {
     document.getElementById("move").addEventListener("click", () => this.handleMove());
 
     this.displayBoard()
+  }
+
+  moveFigure(from, to) {
+    let figureIndex = tileDescriptionToIndex(from)
+    let figureColor = this.board.tiles[figureIndex].figure.color
+    let turnColor =(this.turnNumber||0) % 2 === 0 ? TileColor.White : TileColor.Black
+
+    if (figureColor !== turnColor) {
+      alert("Du bist nicht am Zug")
+      return
+    }
+
+    let wasMoved = this.board.moveFigure(from, to)
+    if (wasMoved) {
+      this.incrementTurnNumber()
+    }
+  }
+
+  incrementTurnNumber() {
+    this.turnNumber = (this.turnNumber||0) + 1
+    let turnNumberElement = document.getElementById("turn-number")
+    turnNumberElement.innerHTML = "" + this.turnNumber
   }
 
   handleClick(row, column){
@@ -28,7 +51,7 @@ export class Game {
         let from = indexToTileDescription(this.selectedTile)
         let to = indexToTileDescription(index)
 
-        this.board.moveFigure(from, to)
+        this.moveFigure(from, to)
         this.selectedTile = null
         this.displayBoard()
       }
@@ -85,7 +108,7 @@ export class Game {
     let from = parts[0]
     let to = parts[1]
 
-    this.board.moveFigure(from, to)
+    this.moveFigure(from, to)
     this.displayBoard()
   }
 }

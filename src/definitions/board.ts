@@ -57,7 +57,7 @@ export class Board {
     }
   }
 
-  moveFigure(from: string, to: string) {
+  moveFigure(from: string, to: string): boolean {
     let [fromRow, fromColumn] = tileDescriptionToRowAndColumn(from)
     let fromIndex = rowAndColumnToIndex(fromRow, fromColumn)
 
@@ -69,20 +69,21 @@ export class Board {
 
     if (!fromTile.figure) {
       alert("Ursprungsfeld ist leer")
-      return
+      return false
     }
 
     if (toTile.figure && fromTile.figure.color === toTile.figure.color) {
       alert("Feld ist Besetzt")
-      return
+      return false
     }
 
     if (!fromTile.figure.isPermittedMove(from, to, this)) {
       alert("Figur darf sich nicht so bewegen!")
-      return
+      return false
     }
 
     toTile.figure = fromTile.figure
     fromTile.figure = null;
+    return true
   }
 }
