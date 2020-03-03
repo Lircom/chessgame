@@ -45,6 +45,7 @@ export class Game {
     if (this.selectedTile) {
       if (this.selectedTile === index ) {
         this.selectedTile = null
+        this.displayBoard()
          return
       }
       else {
