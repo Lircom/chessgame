@@ -9,6 +9,7 @@ export class Tile {
   color: TileColor;
   figure: Figure;
 
+
   constructor(color: TileColor) {
     this.color = color;
     this.figure = null;
